@@ -1,0 +1,10 @@
+{
+  "name": "micro-repos-apps-final-test-e2e",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "micro-repos/e2e/final-test-e2e/src",
+  "implicitDependencies": ["micro-repos-apps-final-test"],
+  "tags": [],
+  "// targets": "to see all targets run: nx show project micro-repos-apps-final-test-e2e --web",
+  "targets": {}
+}

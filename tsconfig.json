@@ -4,16 +4,67 @@
   "files": [],
   "references": [
     {
-      "path": "./apps-e2e"
+      "path": "./workspace-generators"
     },
     {
-      "path": "./apps"
+      "path": "./micro-repos/apps/test-app"
     },
     {
-      "path": "./app1-e2e"
+      "path": "./micro-repos/libs"
     },
     {
-      "path": "./app1"
+      "path": "./micro-repos/e2e/micro-repos-libs-utils-lib-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/micro-repos-apps-test-app-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/test-counter-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/new-counter-e2e"
+    },
+    {
+      "path": "./micro-repos/apps/test-counter"
+    },
+    {
+      "path": "./micro-repos/apps/new-counter"
+    },
+    {
+      "path": "./micro-repos/e2e/my-app-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/app1-e2e"
+    },
+    {
+      "path": "./micro-repos/apps/my-app"
+    },
+    {
+      "path": "./micro-repos/apps/app1"
+    },
+    {
+      "path": "./micro-repos/libs/my-utils"
+    },
+    {
+      "path": "./micro-repos/e2e/final-test-counter-e2e"
+    },
+    {
+      "path": "./micro-repos/apps/final-test-counter"
+    },
+    {
+      "path": "./micro-repos/e2e/final-test-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/test-fix-e2e"
+    },
+    {
+      "path": "./micro-repos/e2e/my-todo-e2e"
+    },
+    {
+      "path": "./micro-repos/apps/my-todo"
+    },
+    {
+      "path": "./micro-repos/e2e/test3-e2e"
     }
   ]
 }

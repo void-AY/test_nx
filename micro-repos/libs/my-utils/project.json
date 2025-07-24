@@ -1,0 +1,9 @@
+{
+  "name": "my-utils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "micro-repos/libs/my-utils/src",
+  "projectType": "library",
+  "tags": ["scope:libs", "type:util"],
+  "// targets": "to see all targets run: nx show project my-utils --web",
+  "targets": {}
+}

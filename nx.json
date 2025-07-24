@@ -68,6 +68,15 @@
   "targetDefaults": {
     "test": {
       "dependsOn": ["^build"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": ["^build"]
     }
   },
   "generators": {
@@ -83,7 +92,15 @@
       },
       "library": {
         "style": "scss",
-        "linter": "eslint"
+        "linter": "none",
+        "unitTestRunner": "vitest"
+      }
+    },
+    ".": {
+      "counter-app": {
+        "factory": "./tools/generators/counter-app",
+        "schema": "./tools/generators/counter-app/schema.json",
+        "description": "Создает React приложение со счетчиком"
       }
     }
   }

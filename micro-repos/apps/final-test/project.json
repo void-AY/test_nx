@@ -1,0 +1,9 @@
+{
+  "name": "micro-repos-apps-final-test",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "micro-repos-apps-final-test/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project micro-repos-apps-final-test --web",
+  "targets": {}
+}

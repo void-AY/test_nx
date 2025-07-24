@@ -1,0 +1,19 @@
+{
+  "generators": {
+    "counter-app": {
+      "factory": "././counter-app",
+      "schema": "././schema.json",
+      "description": "Создает React приложение со счетчиком"
+    },
+    "todo-app": {
+      "factory": "././todo-app",
+      "schema": "././todo-app-schema.json",
+      "description": "Создает React приложение со списком задач"
+    },
+    "utils-lib": {
+      "factory": "././utils-lib",
+      "schema": "././utils-lib-schema.json",
+      "description": "Создает TypeScript библиотеку с утилитами"
+    }
+  }
+}

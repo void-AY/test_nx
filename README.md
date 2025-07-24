@@ -1,101 +1,295 @@
-# 
+# Nx Workspace с Микро-Репозиториями
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## О проекте
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+Этот проект представляет собой Nx workspace, настроенный для работы с микро-репозиториями. Он включает в себя кастомные генераторы для создания React приложений и утилитарных библиотек с автоматической организацией в структурированную файловую систему.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Что такое Nx?
 
-## Run tasks
+[Nx](https://nx.dev) — это мощный инструмент для разработки в монорепозитории, который предоставляет:
 
-To run the dev server for your app, use:
+- **Умное кэширование** — ускоряет сборку и тестирование
+- **Граф зависимостей** — визуализирует связи между проектами
+- **Генераторы кода** — автоматизирует создание проектов и компонентов
+- **Исполнители задач** — оптимизирует выполнение команд
+- **Плагины** — интеграция с популярными фреймворками
 
-```sh
-npx nx serve .
+## Структура проекта
+
+```
+nx-workspace/
+├── micro-repos/                    # Основная папка для всех микро-репозиториев
+│   ├── apps/                       # React приложения
+│   │   ├── my-app/
+│   │   ├── test-counter/
+│   │   └── ...
+│   ├── e2e/                        # E2E тесты для приложений
+│   │   ├── my-app-e2e/
+│   │   ├── test-counter-e2e/
+│   │   └── ...
+│   └── libs/                       # Утилитарные библиотеки
+│       ├── my-utils/
+│       └── ...
+├── workspace-generators/           # Кастомные генераторы
+│   ├── counter-app.ts             # Генератор React приложений
+│   ├── utils-lib.ts               # Генератор утилитарных библиотек
+│   └── ...
+└── ...
 ```
 
-To create a production bundle:
+## Создание нового проекта
 
-```sh
-npx nx build .
+Для создания нового Nx workspace с микро-репозиториями и кастомными генераторами, следуйте подробной инструкции в файле [PROJECT_SETUP.md](./PROJECT_SETUP.md).
+
+Краткий обзор:
+1. Создание Nx workspace
+2. Установка зависимостей
+3. Настройка структуры проекта
+4. Создание workspace генераторов
+5. Настройка и создание первого приложения
+
+## Доступные генераторы
+
+### 1. counter-app
+
+Создает новое React приложение со счетчиком.
+
+**Использование:**
+```bash
+nx generate counter-app <название> --category=<категория>
 ```
 
-To see all available targets to run for a project, run:
+**Параметры:**
+- `name` (обязательный) - название приложения
+- `category` (обязательный) - категория для организации (например: apps, tools)
 
-```sh
-npx nx show project .
+**Пример:**
+```bash
+nx generate counter-app my-counter --category=apps
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+**Создает:**
+- React приложение с Vite
+- E2E тесты с Cypress
+- Компонент счетчика с состоянием
+- Стили и конфигурационные файлы
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### 2. todo-app
 
-## Add new projects
+Создает React приложение с функциональностью todo-списка, включая добавление, редактирование, удаление задач, фильтрацию по статусу и систему приоритетов.
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/react:app demo
+**Использование:**
+```bash
+nx generate todo-app <название> [опции]
 ```
 
-To generate a new library, use:
+**Параметры:**
+- `name` (обязательный) — название приложения
+- `category` — категория проекта (по умолчанию: "apps")
+- `title` — заголовок приложения (по умолчанию: "Todo App")
+- `enableFilters` — включить фильтрацию по статусу (по умолчанию: true)
+- `enablePriority` — включить систему приоритетов (по умолчанию: true)
 
-```sh
-npx nx g @nx/react:lib mylib
+**Примеры:**
+```bash
+# Создать базовое todo приложение
+nx generate todo-app my-todo --category=apps
+
+# Создать приложение с кастомным заголовком
+nx generate todo-app project-tasks --title="Задачи проекта" --category=apps
+
+# Создать приложение без системы приоритетов
+nx generate todo-app simple-todo --enablePriority=false --category=apps
+
+# Создать приложение только с базовой функциональностью
+nx generate todo-app basic-todo --enableFilters=false --enablePriority=false --category=apps
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+**Создает:**
+- React приложение с Vite
+- E2E тесты с Cypress
+- Компонент TodoApp с полной функциональностью:
+  - Добавление новых задач
+  - Редактирование существующих задач
+  - Удаление задач
+  - Отметка задач как выполненных
+  - Фильтрация по статусу (все/активные/выполненные)
+  - Система приоритетов (высокий/средний/низкий)
+  - Счетчик активных задач
+- Адаптивный дизайн с современным UI
+- Стили и конфигурационные файлы
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### 3. utils-lib
 
-## Set up CI!
+Создает библиотеку утилитарных функций с опциональными тестами и Storybook.
 
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
+**Использование:**
+```bash
+nx generate utils-lib <название> [опции]
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+**Параметры:**
+- `name` (обязательный) — название библиотеки
+- `category` — категория (libs, tools, shared)
+- `description` — описание библиотеки
+- `includeTests` — включить тесты (по умолчанию: true)
+- `includeStorybook` — включить Storybook (по умолчанию: false)
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Примеры:**
+```bash
+# Создать базовую библиотеку утилит
+nx generate utils-lib common-utils --category=libs
 
-### Step 2
+# Создать библиотеку с описанием и тестами
+nx generate utils-lib string-helpers --description="Утилиты для работы со строками" --includeTests=true --category=libs
 
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
+# Создать библиотеку со Storybook
+nx generate utils-lib ui-helpers --category=shared --includeStorybook=true
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Создает:**
+- Утилитарную библиотеку в `micro-repos/libs/<название>/`
+- Набор полезных утилитарных функций:
+  - `toCamelCase` — преобразование в camelCase
+  - `toKebabCase` — преобразование в kebab-case
+  - `delay` — асинхронная задержка
+  - `isEmpty` — проверка на пустоту
+  - `deepClone` — глубокое клонирование объектов
+- Тесты для всех функций (если включены)
+- README с документацией
+- TypeScript конфигурация
 
-## Install Nx Console
+## Команды для работы с проектами
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+### Просмотр всех проектов
+```bash
+nx show projects
+```
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Запуск приложения
+```bash
+nx serve <название-проекта>
+# Например: nx serve micro-repos-apps-my-counter
+```
 
-## Useful links
+### Сборка проекта
+```bash
+nx build <название-проекта>
+```
 
-Learn more:
+### Запуск тестов
+```bash
+# Юнит-тесты
+nx test <название-проекта>
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# E2E тесты
+nx e2e <название-проекта>-e2e
+```
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Линтинг
+```bash
+nx lint <название-проекта>
+```
+
+## Особенности архитектуры
+
+### Автоматическая организация файлов
+
+Все генераторы автоматически:
+- Размещают проекты в правильной структуре папок
+- Настраивают корректные пути в конфигурационных файлах
+- Создают соответствующие E2E тесты в отдельной папке
+- Обновляют зависимости и метаданные проекта
+
+### Исправление путей
+
+Генераторы автоматически исправляют пути в:
+- `tsconfig.json` — для корректного наследования базовой конфигурации
+- `project.json` — для правильных схем и sourceRoot
+- E2E конфигурациях — для корректной работы тестов
+
+### Именование проектов
+
+Проекты автоматически получают префиксы:
+- Приложения: `micro-repos-apps-<название>`
+- Библиотеки: `micro-repos-libs-<название>`
+- E2E тесты: `micro-repos-apps-<название>-e2e`
+
+## Разработка и расширение
+
+### Создание нового генератора
+
+1. Создайте файл генератора в `workspace-generators/`
+2. Определите схему в соответствующем JSON файле
+3. Зарегистрируйте генератор в `generators.json`
+4. Создайте шаблоны в папке `<генератор>-files/`
+
+### Структура генератора
+
+```typescript
+export async function myGenerator(
+  tree: Tree,
+  options: MyGeneratorSchema
+) {
+  // Логика создания проекта
+  await formatFiles(tree);
+  return () => {
+    installPackagesTask(tree);
+  };
+}
+```
+
+## Примеры использования
+
+### Создание счетчика
+
+```bash
+# Создать приложение счетчика
+nx generate counter-app my-counter --category=apps
+
+# Запустить приложение
+nx serve <полное-название-проекта>
+```
+
+### Создание todo приложения
+
+```bash
+# Создать todo приложение с полным функционалом
+nx generate todo-app my-todo --title="Мои задачи" --category=apps
+
+# Запустить приложение
+nx serve <полное-название-проекта>
+```
+
+### Создание утилитарной библиотеки
+
+```bash
+# Создать библиотеку утилит
+nx generate utils-lib shared-helpers --description="Общие утилиты" --category=libs
+
+# Использовать в других проектах
+# import { toCamelCase } from '@<workspace-name>/shared-helpers';
+```
+
+## Полезные команды Nx
+
+```bash
+# Показать граф зависимостей
+nx graph
+
+# Показать информацию о проекта
+nx show project <название-проекта>
+
+# Запустить команду для всех проектов
+nx run-many --target=build --all
+
+# Запустить команду только для измененных проектов
+nx affected --target=test
+
+# Очистить кэш
+nx reset
+```
+
+---
+
+**Примечание:** Этот workspace настроен для эффективной разработки микро-приложений с автоматизированным управлением структурой проекта и зависимостями.

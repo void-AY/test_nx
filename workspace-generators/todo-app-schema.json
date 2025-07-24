@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "todo-app",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Имя приложения",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Как назвать приложение?"
+    },
+    "title": {
+      "type": "string",
+      "description": "Заголовок приложения",
+      "default": "Список задач",
+      "x-prompt": "Какой заголовок для приложения?"
+    },
+    "category": {
+      "type": "string",
+      "description": "Категория микрорепозитория",
+      "default": "apps",
+      "enum": ["apps", "libs", "tools", "experiments"],
+      "x-prompt": {
+        "message": "В какую категорию поместить проект?",
+        "type": "list",
+        "items": [
+          { "value": "apps", "label": "Приложения (apps)" },
+          { "value": "libs", "label": "Библиотеки (libs)" },
+          { "value": "tools", "label": "Инструменты (tools)" },
+          { "value": "experiments", "label": "Эксперименты (experiments)" }
+        ]
+      }
+    },
+    "enableFilters": {
+      "type": "boolean",
+      "description": "Включить фильтры задач (все/активные/завершенные)",
+      "default": true,
+      "x-prompt": "Включить фильтры задач?"
+    },
+    "enablePriority": {
+      "type": "boolean",
+      "description": "Включить приоритеты задач",
+      "default": false,
+      "x-prompt": "Включить приоритеты задач?"
+    }
+  },
+  "required": ["name"]
+}

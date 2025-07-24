@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "UtilsLib",
+  "title": "Create a utility library",
+  "description": "Creates a TypeScript utility library with optional testing and documentation",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Library name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?",
+      "pattern": "^[a-zA-Z].*$"
+    },
+    "category": {
+      "description": "The category where the library should be placed",
+      "type": "string",
+      "default": "libs",
+      "enum": ["libs", "tools", "shared"],
+      "x-prompt": {
+        "message": "Which category should this library belong to?",
+        "type": "list",
+        "items": [
+          {
+            "value": "libs",
+            "label": "libs - General purpose libraries"
+          },
+          {
+            "value": "tools",
+            "label": "tools - Development tools and utilities"
+          },
+          {
+            "value": "shared",
+            "label": "shared - Shared components and utilities"
+          }
+        ]
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Library description",
+      "default": "Utility library",
+      "x-prompt": "What is the description of this library?"
+    },
+    "includeTests": {
+      "type": "boolean",
+      "description": "Include unit tests",
+      "default": true,
+      "x-prompt": "Would you like to include unit tests?"
+    },
+    "includeStorybook": {
+      "type": "boolean",
+      "description": "Include Storybook configuration",
+      "default": false,
+      "x-prompt": "Would you like to include Storybook for documentation?"
+    }
+  },
+  "required": ["name"]
+}

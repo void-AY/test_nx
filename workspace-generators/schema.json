@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "counter-app",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Имя приложения",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Как назвать приложение?"
+    },
+    "title": {
+      "type": "string",
+      "description": "Заголовок счетчика",
+      "default": "Счетчик",
+      "x-prompt": "Какой заголовок для счетчика?"
+    },
+    "category": {
+      "type": "string",
+      "description": "Категория микрорепозитория",
+      "default": "apps",
+      "enum": ["apps", "libs", "tools", "experiments"],
+      "x-prompt": {
+        "message": "В какую категорию поместить проект?",
+        "type": "list",
+        "items": [
+          { "value": "apps", "label": "Приложения (apps)" },
+          { "value": "libs", "label": "Библиотеки (libs)" },
+          { "value": "tools", "label": "Инструменты (tools)" },
+          { "value": "experiments", "label": "Эксперименты (experiments)" }
+        ]
+      }
+    }
+  },
+  "required": ["name"]
+}
